@@ -39,6 +39,7 @@ def register():
     return render_template('register.html')
 
 
+
 @auth.route('/logout')
 def logout():
     return "<h1>logout</h1>"

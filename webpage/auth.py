@@ -31,12 +31,7 @@ def register():
         elif password != confirm_password:
             flash('Passwords do not match', category='error')
         else:
-            # we have to has password here
-            hashed_password = generate_password_hash(password, method='sha256')
-            # create user instance and add to db
-            new_user = User(email=email, username=username, password=hashed_password)
-            db.session.add(new_user)
-            db.session.commit()
+            new_user = User.create(email=email, username=username, password=password)
 
             flash('Registration successful! You can now log in.', category='success')
             return redirect(url_for('auth.login'))

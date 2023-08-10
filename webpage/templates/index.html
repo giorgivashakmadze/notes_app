@@ -2,5 +2,14 @@
 {% block title%}Home{% endblock %}
 
 {% block content %}
-<h1>home page</h1>
+    <h1>Welcome, {{ current_user.username }}!</h1>
+
+    <h2>Your Notes:</h2>
+    <ul>
+        {% for note in current_user.notes %}
+            <li>{{ note.content }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
 {% endblock %}

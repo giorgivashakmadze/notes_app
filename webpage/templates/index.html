@@ -2,14 +2,27 @@
 {% block title%}Home{% endblock %}
 
 {% block content %}
-    <h1>Welcome, {{ current_user.username }}!</h1>
+    <div class="container mt-5">
+        <h1>Notes App</h1>
 
-    <h2>Your Notes:</h2>
-    <ul>
-        {% for note in current_user.notes %}
-            <li>{{ note.content }}</li>
-        {% endfor %}
-    </ul>
+        <!-- Note Submission Form -->
+        <form method="POST" name="save_note" action="{{ url_for('views.index') }}">
+            <div class="input-group mb-3">
+                <label>
+                    <input type="text" class="form-control" name="note_content" placeholder="Enter your note...">
+                </label>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Save Note</button>
+                </div>
+            </div>
+        </form>
 
-    <a href="{{ url_for('auth.logout') }}">Logout</a>
+        <!-- Display Saved Notes -->
+        <h2>Your Notes:</h2>
+        <ul class="list-group">
+            {% for note in user.notes %}
+                <li class="list-group-item">{{ note.content }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
